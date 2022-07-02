@@ -178,7 +178,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &118012688
 CapsuleCollider2D:
@@ -245,6 +245,26 @@ PrefabInstance:
     - target: {fileID: -6989573500844737601, guid: c90b23390a6f65b49bb4cbefc6c4a699, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.2395798
+      objectReference: {fileID: 0}
+    - target: {fileID: -4842949131482435671, guid: c90b23390a6f65b49bb4cbefc6c4a699, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99998844
+      objectReference: {fileID: 0}
+    - target: {fileID: -4842949131482435671, guid: c90b23390a6f65b49bb4cbefc6c4a699, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4842949131482435671, guid: c90b23390a6f65b49bb4cbefc6c4a699, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4842949131482435671, guid: c90b23390a6f65b49bb4cbefc6c4a699, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0048212423
+      objectReference: {fileID: 0}
+    - target: {fileID: -4842949131482435671, guid: c90b23390a6f65b49bb4cbefc6c4a699, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2020890169298025903, guid: c90b23390a6f65b49bb4cbefc6c4a699, type: 3}
       propertyPath: m_LocalRotation.w

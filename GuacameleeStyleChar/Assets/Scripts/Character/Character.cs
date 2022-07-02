@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GuacameleeStyleChar.Character
@@ -11,12 +9,24 @@ namespace GuacameleeStyleChar.Character
         public Rigidbody2D Rigidbody;
         public GroundDetector GroundDetector;
 
+        public CharacterModel Model { get; private set; }
         public CharacterMover Mover { get; private set; }
 
         private void Awake()
         {
+            InitModel();
             Mover = new CharacterMover(this);
-            SetState(new IdleState(this));
+
+            SetState(new RunState(this));
+        }
+
+        private void InitModel()
+        {
+            Model = new CharacterModel
+            {
+                JumpsCount = 0,
+                MaxJumpsCount = 2
+            };
         }
     }
 }

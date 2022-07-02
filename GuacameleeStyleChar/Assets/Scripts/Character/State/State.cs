@@ -8,6 +8,13 @@ namespace GuacameleeStyleChar.Character
     {
         protected Character _character;
 
+        protected Animator Animator => _character.Animator;
+        protected CharacterModel Model => _character.Model;
+        protected Rigidbody2D Rigidbody => _character.Rigidbody;
+        protected GroundDetector GroundDetector => _character.GroundDetector;
+        protected CharacterMover Mover => _character.Mover;
+        protected CharacterConfig Config => _character.Config;
+
         public State(Character character)
         {
             _character = character;

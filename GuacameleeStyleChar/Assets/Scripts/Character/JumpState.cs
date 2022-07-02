@@ -15,27 +15,32 @@ namespace GuacameleeStyleChar.Character
 
         public override void Start()
         {
-            _character.Animator.Play(CharAnimStates.FLY, 0);
-            _maxJumpTime = Time.time + _character.Config.MaxJumpVelocityDuration;
+            Model.JumpsCount++;
+
+            if (Model.JumpsCount > 1)
+                Animator.SetTrigger(CharAnimStates.FLIP);
+            Animator.Play(CharAnimStates.FLY, 0);
+
+            _maxJumpTime = Time.time + Config.MaxJumpVelocityDuration;
         }
 
         public override void Update()
         {
-            _character.Mover.DefaultMoveUpdate();
+            Mover.DefaultMoveUpdate();
 
             _isJumping = ControlReader.JumpHold && Time.time <= _maxJumpTime;
 
             if (_isJumping)
-                SetVerticalVelocity(_character.Config.JumpVelocity);
+                SetVerticalVelocity(Config.JumpVelocity);
             else
                 _character.SetState(new FlyState(_character));
         }
 
         private void SetVerticalVelocity(float value)
         {
-            Vector3 newVelocity = _character.Rigidbody.velocity;
+            Vector3 newVelocity = Rigidbody.velocity;
             newVelocity.y = value;
-            _character.Rigidbody.velocity = newVelocity;
+            Rigidbody.velocity = newVelocity;
         }
     }
 }
