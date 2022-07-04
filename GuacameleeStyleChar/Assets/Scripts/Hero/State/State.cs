@@ -13,6 +13,7 @@ namespace GuacameleeStyleChar.Character
         protected HeroConfig Config => Hero.Config;
         protected HeroPhysics Physics => Hero.Physics;
         protected HeroCore Core => Hero.Core;
+        protected HeroAppearance Appearance => Hero.Appearance;
 
         public State(Hero hero)
         {

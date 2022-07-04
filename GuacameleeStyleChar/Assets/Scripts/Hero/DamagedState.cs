@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using GuacameleeStyleChar.Utility;
 
@@ -31,7 +29,9 @@ namespace GuacameleeStyleChar.Character
 
         private IEnumerator BeforeFallCoro()
         {
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(Config.TakingDmgDurationSec);
+
+            Appearance.DoBlicking();
 
             Physics.SetMode(HeroPhysicsModeType.Falling);
             Animator.Play(HeroAnimParams.FALL, 0);
@@ -53,8 +53,7 @@ namespace GuacameleeStyleChar.Character
 
         private IEnumerator AfterFallCoro()
         {
-            //show anim
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(Config.DmgRecoveryDurationSec);
 
             Physics.SetMode(HeroPhysicsModeType.Default);
             Hero.SetState(new RunState(Hero));

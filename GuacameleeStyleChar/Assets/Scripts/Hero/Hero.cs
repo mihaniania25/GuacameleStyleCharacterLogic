@@ -7,6 +7,7 @@ namespace GuacameleeStyleChar.Character
         public HeroConfig Config;
         public Animator Animator;
         public Rigidbody2D Rigidbody;
+        public HeroAppearance Appearance;
         public HeroPhysics Physics;
 
         public HeroModel Model { get; private set; }
@@ -15,13 +16,22 @@ namespace GuacameleeStyleChar.Character
 
         private void Awake()
         {
+            Setup();
+            SetState(new RunState(this));
+        }
+
+        private void Setup()
+        {
             InitModel();
+
             Mover = new HeroMover(this);
+
             Physics.Setup(this);
             Physics.SetMode(HeroPhysicsModeType.Default);
-            Core = new HeroCore(this);
 
-            SetState(new RunState(this));
+            Appearance.Setup(Config.AppearanceSettings);
+
+            Core = new HeroCore(this);
         }
 
         private void InitModel()
