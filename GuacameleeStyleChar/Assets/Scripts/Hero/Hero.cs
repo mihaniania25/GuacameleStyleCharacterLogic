@@ -9,6 +9,7 @@ namespace GuacameleeStyleChar.Character
         public Rigidbody2D Rigidbody;
         public HeroAppearance Appearance;
         public HeroPhysics Physics;
+        public HeroSoundPlayer SoundPlayer;
 
         public HeroModel Model { get; private set; }
         public HeroMover Mover { get; private set; }
@@ -17,7 +18,7 @@ namespace GuacameleeStyleChar.Character
         private void Awake()
         {
             Setup();
-            SetState(new RunState(this));
+            SetState(new IdleState(this));
         }
 
         private void Setup()
@@ -43,9 +44,11 @@ namespace GuacameleeStyleChar.Character
             };
         }
 
-        public void TryTakeHit(Vector3 force)
+        public bool TryTakeHit(Vector3 force)
         {
-            _state?.TryTakeHit(force);
+            if (_state != null)
+                return _state.TryTakeHit(force);
+            return false;
         }
     }
 }

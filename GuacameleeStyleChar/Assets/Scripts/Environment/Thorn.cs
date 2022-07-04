@@ -10,6 +10,9 @@ namespace GuacameleeStyleChar.Level
         [Range(5.0f, 85.0f)]
         [SerializeField] private float _hitAngle = 45.0f;
 
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private SoundData _hitSoundData;
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.tag == GameTags.PLAYER)
@@ -25,8 +28,18 @@ namespace GuacameleeStyleChar.Level
                 if (vectorToHero.x <= 0)
                     forceX *= -1.0f;
 
-                hero.TryTakeHit(new Vector3(forceX, forceY, 0.0f));
+                bool isHitted = hero.TryTakeHit(new Vector3(forceX, forceY, 0.0f));
+
+                if (isHitted)
+                    PlayHitSound();
             }
+        }
+
+        private void PlayHitSound()
+        {
+            _audioSource.clip = _hitSoundData.Clip;
+            _audioSource.volume = _hitSoundData.Volume;
+            _audioSource.Play();
         }
     }
 }

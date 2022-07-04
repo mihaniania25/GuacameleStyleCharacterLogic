@@ -14,9 +14,9 @@ namespace GuacameleeStyleChar.Character
 
         }
 
-        public override void TryTakeHit(Vector3 force)
+        public override bool TryTakeHit(Vector3 force)
         {
-
+            return false;
         }
 
         public override void Start()
@@ -24,10 +24,10 @@ namespace GuacameleeStyleChar.Character
             Rigidbody.velocity = Vector3.zero;
             Rigidbody.simulated = false;
             Animator.speed = 0.0f;
-            _beforeFallTask = new Task(BeforeFallCoro());
+            _beforeFallTask = new Task(TakeHitCoro());
         }
 
-        private IEnumerator BeforeFallCoro()
+        private IEnumerator TakeHitCoro()
         {
             yield return new WaitForSeconds(Config.TakingDmgDurationSec);
 
@@ -39,7 +39,21 @@ namespace GuacameleeStyleChar.Character
             Rigidbody.simulated = true;
             Rigidbody.AddForce(Model.TakenDamageForce);
 
+            yield return WaitUntilFallDown();
+
+            Model.IsGrounded.Value = false;
             Model.IsGrounded.Subscribe(OnGroundedStateChanged, false);
+        }
+
+        private IEnumerator WaitUntilFallDown()
+        {
+            float gravityForce_Y = Rigidbody.mass * Rigidbody.gravityScale * -Physics2D.gravity.y;
+            float acc_Y = (Model.TakenDamageForce.y - gravityForce_Y) / Rigidbody.mass;
+            float vel0_Y = acc_Y * Time.fixedDeltaTime;
+
+            float raiseTime = vel0_Y / (Rigidbody.gravityScale * -Physics2D.gravity.y);
+
+            yield return new WaitForSeconds(raiseTime);
         }
 
         private void OnGroundedStateChanged(bool isGrounded)
@@ -47,6 +61,9 @@ namespace GuacameleeStyleChar.Character
             if (isGrounded)
             {
                 Model.IsGrounded.Unsubscribe(OnGroundedStateChanged);
+
+                SoundPlayer.PlaySound(Config.SoundSettings.Fall);
+
                 _afterFallTask = new Task(AfterFallCoro());
             }
         }
@@ -56,7 +73,7 @@ namespace GuacameleeStyleChar.Character
             yield return new WaitForSeconds(Config.DmgRecoveryDurationSec);
 
             Physics.SetMode(HeroPhysicsModeType.Default);
-            Hero.SetState(new RunState(Hero));
+            Hero.SetState(new WalkState(Hero));
         }
 
         public override void Dispose()

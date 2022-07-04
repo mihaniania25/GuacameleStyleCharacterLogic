@@ -29,8 +29,17 @@ namespace GuacameleeStyleChar.Character
             {
                 Model.IsGrounded.Unsubscribe(OnGroundedChange);
 
-                Hero.SetState(new RunState(Hero));
+                SoundPlayer.PlaySound(Config.SoundSettings.HitGround);
+                SetGroundState();
             }
+        }
+
+        private void SetGroundState()
+        {
+            if (ControlReader.MoveLeft || ControlReader.MoveRight)
+                Hero.SetState(new WalkState(Hero));
+            else
+                Hero.SetState(new IdleState(Hero));
         }
 
         public override void Dispose()

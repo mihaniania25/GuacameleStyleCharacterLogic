@@ -14,6 +14,7 @@ namespace GuacameleeStyleChar.Character
         protected HeroPhysics Physics => Hero.Physics;
         protected HeroCore Core => Hero.Core;
         protected HeroAppearance Appearance => Hero.Appearance;
+        protected HeroSoundPlayer SoundPlayer => Hero.SoundPlayer;
 
         public State(Hero hero)
         {
@@ -35,9 +36,9 @@ namespace GuacameleeStyleChar.Character
 
         }
 
-        public virtual void TryTakeHit(Vector3 force)
+        public virtual bool TryTakeHit(Vector3 force)
         {
-            Core.TakeHit(force);
+            return Core.TakeHit(force);
         }
     }
 }

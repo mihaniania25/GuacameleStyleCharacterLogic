@@ -13,5 +13,6 @@ namespace GuacameleeStyleChar.Character
         public float DmgRecoveryDurationSec = 1.5f;
 
         public HeroAppearanceSettings AppearanceSettings;
+        public HeroSoundSettings SoundSettings;
     }
 }

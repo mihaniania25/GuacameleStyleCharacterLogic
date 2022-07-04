@@ -16,6 +16,7 @@ namespace GuacameleeStyleChar.Character
         public override void Start()
         {
             Model.JumpsCount++;
+            SoundPlayer.PlaySound(Config.SoundSettings.Jump);
 
             if (Model.JumpsCount > 1)
                 Animator.SetTrigger(HeroAnimParams.FLIP);

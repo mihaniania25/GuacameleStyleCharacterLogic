@@ -11,7 +11,7 @@ namespace GuacameleeStyleChar.Character
             _hero = hero;
         }
 
-        public void TakeHit(Vector3 force)
+        public bool TakeHit(Vector3 force)
         {
             _hero.Model.TakenDamageForce = force;
 
@@ -19,6 +19,7 @@ namespace GuacameleeStyleChar.Character
             _hero.Animator.SetInteger(HeroAnimParams.DIRECTION, (int)directionType);
 
             _hero.SetState(new DamagedState(_hero));
+            return true;
         }
     }
 }

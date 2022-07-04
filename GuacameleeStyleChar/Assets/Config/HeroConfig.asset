@@ -21,3 +21,16 @@ MonoBehaviour:
     DamagedBlickData:
       Speed: 35
       DurationSec: 1.3
+  SoundSettings:
+    Walk:
+      Clip: {fileID: 8300000, guid: cb76c681bfb39f44893b620194a58268, type: 3}
+      Volume: 0.434
+    HitGround:
+      Clip: {fileID: 8300000, guid: e48714a8064b2ad4a82c38119de9bb55, type: 3}
+      Volume: 1
+    Jump:
+      Clip: {fileID: 8300000, guid: d2fd5f545c150ad4e83cefd590fd6f75, type: 3}
+      Volume: 1
+    Fall:
+      Clip: {fileID: 8300000, guid: 38df7a88993a18f4e8cb622c8f29c888, type: 3}
+      Volume: 1
