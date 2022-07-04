@@ -6,7 +6,7 @@ namespace GuacameleeStyleChar.Character
 {
     public class DamagedState : State
     {
-        private Task _beforeFallTask;
+        private Task _takeHitTask;
         private Task _afterFallTask;
 
         public DamagedState(Hero hero) : base(hero)
@@ -24,7 +24,7 @@ namespace GuacameleeStyleChar.Character
             Rigidbody.velocity = Vector3.zero;
             Rigidbody.simulated = false;
             Animator.speed = 0.0f;
-            _beforeFallTask = new Task(TakeHitCoro());
+            _takeHitTask = new Task(TakeHitCoro());
         }
 
         private IEnumerator TakeHitCoro()
@@ -73,13 +73,13 @@ namespace GuacameleeStyleChar.Character
             yield return new WaitForSeconds(Config.DmgRecoveryDurationSec);
 
             Physics.SetMode(HeroPhysicsModeType.Default);
-            Hero.SetState(new WalkState(Hero));
+            Hero.SetState(new IdleState(Hero));
         }
 
         public override void Dispose()
         {
             Model.IsGrounded.Unsubscribe(OnGroundedStateChanged);
-            _beforeFallTask?.Stop();
+            _takeHitTask?.Stop();
             _afterFallTask?.Stop();
         }
     }

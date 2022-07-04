@@ -11,8 +11,8 @@ namespace GuacameleeStyleChar.Character
             _state?.Dispose();
 
             _state = state;
-            _state.Start();
-            _state.Update();
+            _state?.Start();
+            _state?.Update();
         }
 
         private void Update()

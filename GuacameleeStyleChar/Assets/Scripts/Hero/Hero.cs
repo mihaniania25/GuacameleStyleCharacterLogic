@@ -50,5 +50,10 @@ namespace GuacameleeStyleChar.Character
                 return _state.TryTakeHit(force);
             return false;
         }
+
+        private void OnDestroy()
+        {
+            SoundPlayer.Dispose();
+        }
     }
 }
