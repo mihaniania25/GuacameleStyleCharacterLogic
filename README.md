@@ -3,3 +3,16 @@ My practice project of implementing State Machine design pattern where I decided
 
 
 Made with Unity, C#
+
+Currently implemented features:
+
+Walk
+Jump & Double-jump
+Taking damage
+Sound Fx
+
+
+Controls:
+Move left: #A
+Move right: #D
+Jump: #Space
