@@ -10,6 +10,6 @@ My practice project of implementing State Machine design pattern where I decided
 
 
 ### Controls:
-- Move left: A
-- Move right: D
-- Jump: Space
+- Move left: **A**
+- Move right: **D**
+- Jump: **Space**
